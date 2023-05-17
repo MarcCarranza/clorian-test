@@ -34,3 +34,8 @@
   cursor: pointer;
   margin-left: 0.25rem;
 }
+
+.qty__addBtn:disabled {
+  opacity: 0.5;
+  cursor: unset;
+}

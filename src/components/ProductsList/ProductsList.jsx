@@ -6,12 +6,13 @@ import Image from "next/image";
 
 // Redux
 import { addItemToCart } from "../../redux/features/cartSlice";
+import { useAppDispatch } from "../../redux/hooks";
 
 // Styles
 import styles from "./ProductsList.module.css";
-import { useAppDispatch } from "../../redux/hooks";
 
-const QUANTITY_LIST = [1, 2, 3, 4, 5];
+// Constants
+import { GLOBAL_ICONS, QUANTITY_LIST } from "../../constants";
 
 export default function ProductsList({ data, isLoading = false }) {
   // Redux
@@ -35,6 +36,12 @@ export default function ProductsList({ data, isLoading = false }) {
     dispatch(addItemToCart({ ...product, qty }));
   };
 
+  const checkValid = (date) => {
+    const validDate = new Date(date).valueOf();
+    const now = new Date().valueOf();
+    return validDate - now < 0;
+  };
+
   return (
     <div className={styles.list_wrapper}>
       <ul className={styles.list}>
@@ -53,6 +60,7 @@ export default function ProductsList({ data, isLoading = false }) {
                     onChange={(e) =>
                       onChangeQuantity(product.id, e.currentTarget.value)
                     }
+                    disabled={checkValid(product.valid_until)}
                   >
                     {QUANTITY_LIST.map((qty) => (
                       <option key={`${product.id}-${qty}`} value={qty}>
@@ -63,10 +71,11 @@ export default function ProductsList({ data, isLoading = false }) {
                   <button
                     className={styles.qty__addBtn}
                     onClick={() => onAddProduct(product)}
+                    disabled={checkValid(product.valid_until)}
                   >
                     <Image
-                      src="/plus.svg"
-                      alt="Add icon"
+                      src={GLOBAL_ICONS.add.src}
+                      alt={GLOBAL_ICONS.add.altText}
                       width={20}
                       height={20}
                     />

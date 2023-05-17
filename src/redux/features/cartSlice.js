@@ -17,7 +17,8 @@ export const cartSlice = createSlice({
       if (itemIndex === -1) {
         updatedItems.push(action.payload);
       } else {
-        let qty = updatedItems[itemIndex].qty + action.payload.qty;
+        let qty =
+          parseInt(updatedItems[itemIndex].qty) + parseInt(action.payload.qty);
         // Checking if it's more than 10
         if (qty > 10) {
           qty = 10;
