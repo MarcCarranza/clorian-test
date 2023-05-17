@@ -15,6 +15,7 @@
 
 .list__qty {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   flex: 2;
 }
@@ -28,5 +29,8 @@
 .qty__addBtn {
   border: none;
   background: none;
-  padding-top: 2px;
+  padding: 0.5rem;
+  padding-top: calc(0.5rem + 2px);
+  cursor: pointer;
+  margin-left: 0.25rem;
 }
