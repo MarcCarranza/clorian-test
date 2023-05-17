@@ -15,7 +15,7 @@ import styles from "./page.module.css";
 import ProductsList from "../components/ProductsList/ProductsList";
 
 export default function Home() {
-  const productsData = useAppSelector((state) => state.homeReducer.products);
+  const productsData = useAppSelector((state) => state.home.products);
   const dispatch = useAppDispatch();
 
   // State

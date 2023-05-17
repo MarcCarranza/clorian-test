@@ -2,16 +2,22 @@
 
 // Dependencies
 import { useState } from "react";
+import Image from "next/image";
+
+// Redux
+import { addItemToCart } from "../../redux/features/cartSlice";
 
 // Styles
 import styles from "./ProductsList.module.css";
-import Image from "next/image";
+import { useAppDispatch } from "../../redux/hooks";
 
 const QUANTITY_LIST = [1, 2, 3, 4, 5];
 
 export default function ProductsList({ data, isLoading = false }) {
-  const [productToAdd, setProductToAdd] = useState(null);
-  // TODO: productsQty would be too much if the list is too large?
+  // Redux
+  const dispatch = useAppDispatch();
+
+  // productsQty would be too much if the list is too large?
   const [productsQty, setProductsQty] = useState({});
 
   // Functionalities
@@ -24,38 +30,39 @@ export default function ProductsList({ data, isLoading = false }) {
     setProductsQty(updatedProductsQty);
   };
 
-  const onAddProduct = (id) => {
-    // TODO: If ID is in, if not qty is the default value ()
+  const onAddProduct = (product) => {
+    const qty = productsQty[product.id] || 1;
+    dispatch(addItemToCart({ ...product, qty }));
   };
 
   return (
     <div className={styles.list_wrapper}>
       <ul className={styles.list}>
         {!isLoading &&
-          data.map(({ id, name, description, valid_date, price }) => {
+          data.map((product) => {
             return (
-              <li className={styles.list__product} key={id}>
+              <li className={styles.list__product} key={product.id}>
                 <div className={styles.list__info}>
-                  <h4>{name}</h4>
-                  <p>{description}</p>
+                  <h4>{product.name}</h4>
+                  <p>{product.description}</p>
                 </div>
                 <div className={styles.list__qty}>
                   <select
                     className={styles.qty__select}
                     id="qty"
                     onChange={(e) =>
-                      onChangeQuantity(id, e.currentTarget.value)
+                      onChangeQuantity(product.id, e.currentTarget.value)
                     }
                   >
                     {QUANTITY_LIST.map((qty) => (
-                      <option key={`${id}-${qty}`} value={qty}>
+                      <option key={`${product.id}-${qty}`} value={qty}>
                         {qty}
                       </option>
                     ))}
                   </select>
                   <button
                     className={styles.qty__addBtn}
-                    onClick={() => onAddProduct(id)}
+                    onClick={() => onAddProduct(product)}
                   >
                     <Image
                       src="/plus.svg"
