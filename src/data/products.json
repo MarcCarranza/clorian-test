@@ -11,34 +11,34 @@
     "name": "Producto 2",
     "description": "Descripción del producto 2",
     "valid_until": "2023-05-01",
-    "price": 19.96
+    "price": 42.2
   },
   {
     "id": "product2",
     "name": "Producto 3",
     "description": "Descripción del producto 3",
     "valid_until": "2023-04-01",
-    "price": 19.96
+    "price": 5.77
   },
   {
     "id": "product3",
     "name": "Producto 4",
     "description": "Descripción del producto 4",
     "valid_until": "2023-07-01",
-    "price": 19.96
+    "price": 9.11
   },
   {
     "id": "product4",
     "name": "Producto 5",
     "description": "Descripción del producto 5",
     "valid_until": "2023-06-01",
-    "price": 19.96
+    "price": 20.12
   },
   {
     "id": "product5",
     "name": "Producto 6",
     "description": "Descripción del producto 6",
     "valid_until": "2023-06-01",
-    "price": 19.96
+    "price": 30.69
   }
 ]

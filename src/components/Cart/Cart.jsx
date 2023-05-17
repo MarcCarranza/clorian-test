@@ -11,16 +11,23 @@ import styles from "./Cart.module.css";
 
 // Constants
 import { GLOBAL_ICONS } from "../../constants";
+import { clearCart } from "../../redux/features/cartSlice";
 
 export default function Cart({ toggleCart }) {
   const cartData = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
-  // Functionalities
+  // Handling
   const stopBubbling = (e) => {
     e.stopPropagation();
   };
 
+  const onClickClear = () => {
+    dispatch(clearCart());
+    toggleCart();
+  };
+
+  // Functionalities
   const getAllTotal = () => {
     if (!cartData.items.length) {
       return 0;
@@ -74,8 +81,14 @@ export default function Cart({ toggleCart }) {
           })}
         </ul>
         <div className={styles.cart__footer}>
-          <button disabled={!cartData.items.length}>Clear Cart</button>
-          <span>{getAllTotal()}</span>
+          <button
+            className={styles.footer__clearBtn}
+            disabled={!cartData.items.length}
+            onClick={onClickClear}
+          >
+            Clear Cart
+          </button>
+          <span className={styles.footer__totalPrice}>{getAllTotal()}€</span>
         </div>
       </div>
     </div>
