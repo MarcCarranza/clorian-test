@@ -1,2 +1,11 @@
 .main {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  min-height: 100vh;
+}
+
+.main__container {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1rem;
 }

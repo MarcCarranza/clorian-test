@@ -1,0 +1,29 @@
+.header {
+}
+
+.header__main {
+  display: flex;
+}
+
+.header__text {
+  flex: 8;
+  margin: 0.5rem 0;
+}
+
+.header__search {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 0.25rem;
+}
+
+.header__cart {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 0.25rem;
+}

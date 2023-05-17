@@ -1,0 +1,32 @@
+.list_wrapper {
+}
+
+.list {
+  padding-top: 1rem;
+}
+
+.list__product {
+  display: flex;
+}
+
+.list__info {
+  flex: 8;
+}
+
+.list__qty {
+  display: flex;
+  align-items: center;
+  flex: 2;
+}
+
+.qty__select {
+  width: 3rem;
+  height: 2.5rem;
+  font-size: 1rem;
+}
+
+.qty__addBtn {
+  border: none;
+  background: none;
+  padding-top: 2px;
+}
