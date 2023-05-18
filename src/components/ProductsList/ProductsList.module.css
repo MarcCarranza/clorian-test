@@ -44,6 +44,10 @@
   margin-left: 0.25rem;
 }
 
+.qty__addBtn:hover {
+  background-color: hsl(200, 100%, 93%);
+}
+
 .qty__addBtn:active {
   background-color: hsl(200, 100%, 85%);
   margin-top: 10px;

@@ -39,7 +39,7 @@ export default function Header({ text, toggleCart }) {
     <header className={styles.header} data-testid="header">
       <div className={styles.header__main}>
         <h1 className={styles.header__text}>{text}</h1>
-        <div
+        <button
           className={styles.header__search_icon}
           onClick={() => setSearchOpen(!isSearchOpen)}
           data-testid="header-searchBtn"
@@ -50,8 +50,8 @@ export default function Header({ text, toggleCart }) {
             width={20}
             height={20}
           />
-        </div>
-        <div
+        </button>
+        <button
           className={styles.header__cart}
           onClick={toggleCart}
           data-testid="header-cartBtn"
@@ -62,7 +62,7 @@ export default function Header({ text, toggleCart }) {
             width={20}
             height={20}
           />
-        </div>
+        </button>
       </div>
       <div
         className={`${styles.header__search} ${
