@@ -6,6 +6,7 @@ import fakeData from "../../data/products.json";
 
 const initialState = {
   products: [],
+  search: "",
 };
 
 export const homeSlice = createSlice({
@@ -15,9 +16,12 @@ export const homeSlice = createSlice({
     getProducts: (state) => {
       state.products = fakeData;
     },
+    searchProduct: (state, action) => {
+      state.search = action.payload;
+    },
   },
 });
 
-export const { getProducts } = homeSlice.actions;
+export const { getProducts, searchProduct } = homeSlice.actions;
 
 export default homeSlice.reducer;

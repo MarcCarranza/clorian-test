@@ -88,10 +88,12 @@
 
 .item__qty {
   background-color: hsl(35, 100%, 70%);
-  padding: 0.25rem 0.65rem;
   border-radius: 0.25rem;
-  min-width: 0.7rem;
-  text-align: center;
+  min-width: 2rem;
+  min-height: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .item__total {

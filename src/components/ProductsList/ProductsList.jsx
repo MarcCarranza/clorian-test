@@ -6,7 +6,7 @@ import Image from "next/image";
 
 // Redux
 import { addItemToCart } from "../../redux/features/cartSlice";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 // Styles
 import styles from "./ProductsList.module.css";
@@ -16,6 +16,7 @@ import { GLOBAL_ICONS, QUANTITY_LIST } from "../../constants";
 
 export default function ProductsList({ data, isLoading = false }) {
   // Redux
+  const searchValue = useAppSelector((state) => state.home.search);
   const dispatch = useAppDispatch();
   // TODO: Filter by search (Redux)
 
@@ -48,8 +49,20 @@ export default function ProductsList({ data, isLoading = false }) {
   };
 
   // Functionalities
+  const filterBySearch = (product) => {
+    if (!searchValue) {
+      return product;
+    }
+    const productName = product.name.toLowerCase();
+    const productDesc = product.description.toLowerCase();
+    return (
+      productName.includes(searchValue.toLowerCase()) ||
+      productDesc.includes(searchValue.toLowerCase())
+    );
+  };
+
   const orderProducts = () => {
-    const sortedProducts = [...data];
+    const sortedProducts = data.filter(filterBySearch);
     sortedProducts.sort((a, b) => {
       const prodAName = a[orderType.type].toUpperCase();
       const prodBName = b[orderType.type].toUpperCase();
@@ -105,7 +118,7 @@ export default function ProductsList({ data, isLoading = false }) {
           >
             <Image
               src={GLOBAL_ICONS.order.src}
-              altText={GLOBAL_ICONS.order.altText}
+              alt={GLOBAL_ICONS.order.altText}
               width={15}
               height={15}
               style={{

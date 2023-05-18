@@ -23,4 +23,8 @@ export const GLOBAL_ICONS = {
     src: "/arrow-up.svg",
     altText: "Order icon",
   },
+  clear: {
+    src: "/x.svg",
+    altText: "Clear search icon",
+  },
 };

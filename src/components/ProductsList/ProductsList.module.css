@@ -32,8 +32,15 @@
 .sortBlock__buttonGroup {
   display: flex;
   flex-grow: 1;
-  justify-content: space-between;
   padding-right: 0.75rem;
+}
+
+.sortBlock__buttonGroup .sortBlock__button {
+  margin-left: 0.75rem;
+}
+
+.sortBlock__buttonGroup .sortBlock__button:first-child {
+  margin-left: 0;
 }
 
 .sortBlock__button img {
