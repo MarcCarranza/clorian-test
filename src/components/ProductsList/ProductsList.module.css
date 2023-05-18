@@ -1,9 +1,10 @@
-.list_wrapper {
+.list_container {
 }
 
 .list__sort {
   display: flex;
   justify-content: space-between;
+  padding-top: 0.5rem;
 }
 
 .list__sortBlock {
@@ -21,6 +22,11 @@
   border: none;
   background-color: transparent;
   padding: 0.25rem 0.5rem;
+  transition: background 0.2s ease-in-out;
+}
+
+.sortBlock__buttonActive {
+  background-color: hsl(200, 100%, 85%);
 }
 
 .sortBlock__buttonGroup {
@@ -35,7 +41,7 @@
 }
 
 .list {
-  padding-top: 1rem;
+  padding-top: 0.5rem;
 }
 
 .list__product {

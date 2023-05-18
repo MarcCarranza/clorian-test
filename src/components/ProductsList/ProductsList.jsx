@@ -19,8 +19,8 @@ export default function ProductsList({ data, isLoading = false }) {
   const dispatch = useAppDispatch();
   // TODO: Filter by search (Redux)
 
-  // TODO: The selectors have to be controlled
-  // productsQty would be too much if the list is too large?
+  // TODO: The selectors have to be controlled for clear
+  // productsQty to Redux home
   const [productsQty, setProductsQty] = useState({});
   const [orderType, setOrderType] = useState({ type: "name", sort: false });
 
@@ -72,19 +72,25 @@ export default function ProductsList({ data, isLoading = false }) {
   };
 
   return (
-    <div className={styles.list_wrapper}>
+    <div className={styles.list_container}>
       <div className={styles.list__sort}>
         <div className={styles.list__sortBlock} style={{ flexGrow: 1 }}>
           <label className={styles.sortBlock__label}>Sort By</label>
           <div className={styles.sortBlock__buttonGroup}>
             <button
-              className={styles.sortBlock__button}
+              className={`${styles.sortBlock__button} ${
+                orderType.type === "name" ? styles.sortBlock__buttonActive : ""
+              }`}
               onClick={() => updateOrderType({ type: "name" })}
             >
               Name
             </button>
             <button
-              className={styles.sortBlock__button}
+              className={`${styles.sortBlock__button} ${
+                orderType.type === "description"
+                  ? styles.sortBlock__buttonActive
+                  : ""
+              }`}
               onClick={() => updateOrderType({ type: "description" })}
             >
               Description
