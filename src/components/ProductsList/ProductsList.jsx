@@ -1,12 +1,12 @@
 "use client";
 
 // Dependencies
-import { useState } from "react";
 import Image from "next/image";
 
 // Redux
 import { addItemToCart } from "../../redux/features/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { updateProductsQty, updateOrder } from "../../redux/features/homeSlice";
 
 // Styles
 import styles from "./ProductsList.module.css";
@@ -16,23 +16,14 @@ import { GLOBAL_ICONS, QUANTITY_LIST } from "../../constants";
 
 export default function ProductsList({ data, isLoading = false }) {
   // Redux
-  const searchValue = useAppSelector((state) => state.home.search);
+  const { productsQty, searchValue, orderType } = useAppSelector(
+    (state) => state.home
+  );
   const dispatch = useAppDispatch();
-  // TODO: Filter by search (Redux)
-
-  // TODO: The selectors have to be controlled for clear
-  // productsQty to Redux home
-  const [productsQty, setProductsQty] = useState({});
-  const [orderType, setOrderType] = useState({ type: "name", sort: false });
 
   // Handlers
   const onChangeQuantity = (productId, qty) => {
-    const updatedProductsQty = {
-      ...productsQty,
-      [productId]: qty,
-    };
-
-    setProductsQty(updatedProductsQty);
+    dispatch(updateProductsQty({ productId, qty }));
   };
 
   const onAddProduct = (product) => {
@@ -41,11 +32,7 @@ export default function ProductsList({ data, isLoading = false }) {
   };
 
   const updateOrderType = (paramObj) => {
-    const updatedOrderType = {
-      ...orderType,
-      ...paramObj,
-    };
-    setOrderType(updatedOrderType);
+    dispatch(updateOrder(paramObj));
   };
 
   // Functionalities
@@ -82,6 +69,13 @@ export default function ProductsList({ data, isLoading = false }) {
     const validDate = new Date(date).valueOf();
     const now = new Date().valueOf();
     return validDate - now < 0;
+  };
+
+  const getSelectedQty = (productId) => {
+    if (productsQty[productId]) {
+      return productsQty[productId];
+    }
+    return "";
   };
 
   return (
@@ -145,6 +139,7 @@ export default function ProductsList({ data, isLoading = false }) {
                       onChangeQuantity(product.id, e.currentTarget.value)
                     }
                     disabled={checkValid(product.valid_until)}
+                    value={getSelectedQty(product.id)}
                   >
                     {QUANTITY_LIST.map((qty) => (
                       <option key={`${product.id}-${qty}`} value={qty}>

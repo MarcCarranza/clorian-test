@@ -2,17 +2,18 @@
 
 // Dependencies
 import Image from "next/image";
+import { useState } from "react";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { clearCart } from "../../redux/features/cartSlice";
+import { clearProductsQty, resetOrder } from "../../redux/features/homeSlice";
 
 // Styles
 import styles from "./Cart.module.css";
 
 // Constants
 import { GLOBAL_ICONS } from "../../constants";
-import { clearCart } from "../../redux/features/cartSlice";
-import { useState } from "react";
 
 export default function Cart({ toggleCart }) {
   // Redux State
@@ -37,8 +38,10 @@ export default function Cart({ toggleCart }) {
 
   const onClickClear = () => {
     setClosingCart(true);
+    dispatch(resetOrder());
     dispatch(clearCart());
-    // TODO: setTimeout + animation
+    dispatch(clearProductsQty());
+    // Timeout for slideOut animation
     setTimeout(() => {
       toggleCart();
       setClosingCart(false);
