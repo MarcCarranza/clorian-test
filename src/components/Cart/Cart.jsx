@@ -12,20 +12,37 @@ import styles from "./Cart.module.css";
 // Constants
 import { GLOBAL_ICONS } from "../../constants";
 import { clearCart } from "../../redux/features/cartSlice";
+import { useState } from "react";
 
 export default function Cart({ toggleCart }) {
+  // Redux State
   const cartData = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
+
+  // State
+  const [closingCart, setClosingCart] = useState(false);
 
   // Handling
   const stopBubbling = (e) => {
     e.stopPropagation();
   };
 
+  const onClickClose = () => {
+    setClosingCart(true);
+    setTimeout(() => {
+      toggleCart();
+      setClosingCart(false);
+    }, 200);
+  };
+
   const onClickClear = () => {
+    setClosingCart(true);
     dispatch(clearCart());
     // TODO: setTimeout + animation
-    toggleCart();
+    setTimeout(() => {
+      toggleCart();
+      setClosingCart(false);
+    }, 200);
   };
 
   // Functionalities
@@ -42,7 +59,15 @@ export default function Cart({ toggleCart }) {
 
   return (
     <div className={styles.cart_container} onClick={toggleCart}>
-      <div className={styles.cart} onClick={stopBubbling}>
+      <div
+        className={`${styles.cart_containerBg} ${
+          closingCart ? styles.cart_containerBg_closing : ""
+        }`}
+      />
+      <div
+        className={`${styles.cart} ${closingCart ? styles.cart_closing : ""}`}
+        onClick={stopBubbling}
+      >
         <div className={styles.cart__header}>
           <div className={styles.cart__header_title}>
             <h2 className={styles.cart__header_text}>Cart</h2>
@@ -53,7 +78,10 @@ export default function Cart({ toggleCart }) {
               height={20}
             />
           </div>
-          <button className={styles.cart__header_closeBtn} onClick={toggleCart}>
+          <button
+            className={styles.cart__header_closeBtn}
+            onClick={onClickClose}
+          >
             <Image
               src={GLOBAL_ICONS.close.src}
               alt={GLOBAL_ICONS.close.altText}

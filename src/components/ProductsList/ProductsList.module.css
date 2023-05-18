@@ -90,7 +90,17 @@
   margin-left: 0.25rem;
 }
 
+.qty__addBtn:active {
+  background-color: hsl(200, 100%, 85%);
+  margin-top: 10px;
+}
+
 .qty__addBtn:disabled {
   opacity: 0.5;
   cursor: unset;
+}
+
+.qty__addBtn:disabled:active {
+  margin-top: 0;
+  background-color: transparent;
 }

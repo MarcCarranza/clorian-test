@@ -28,6 +28,10 @@ export default function Header({ text, toggleCart }) {
   };
 
   const onClearSearch = () => {
+    if (!searchValue) {
+      setSearchOpen(!isSearchOpen);
+      return;
+    }
     dispatch(searchProduct(""));
   };
 

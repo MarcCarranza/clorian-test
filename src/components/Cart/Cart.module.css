@@ -4,7 +4,6 @@
   height: calc(100vh - 6rem);
   left: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
   padding: 1rem;
   padding-bottom: 5rem;
   display: flex;
@@ -12,10 +11,40 @@
   align-items: center;
 }
 
+.cart_containerBg {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  animation-name: fadeIn;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
+}
+
+.cart_containerBg_closing {
+  animation-name: fadeOut;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
+}
+
 .cart {
+  position: absolute;
+  z-index: 99;
   background-color: white;
   border-radius: 0.5rem;
-  width: 100%;
+  width: calc(100% - 2rem);
+  left: 1rem;
+  animation-name: slideIn;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
+}
+
+.cart_closing {
+  animation-name: slideOut;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
 }
 
 .cart__header {
@@ -72,11 +101,12 @@
 }
 
 .item__name {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
 .item__price {
+  font-size: 0.9rem;
 }
 
 .item__pricing {
@@ -89,7 +119,7 @@
 .item__qty {
   background-color: hsl(35, 100%, 70%);
   border-radius: 0.25rem;
-  min-width: 2rem;
+  min-width: 1.8rem;
   min-height: 1.6rem;
   display: flex;
   align-items: center;
@@ -97,7 +127,7 @@
 }
 
 .item__total {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -124,9 +154,47 @@
 
 .footer__clearBtn:disabled {
   opacity: 0.5;
+  cursor: auto;
 }
 
 .footer__totalPrice {
   font-size: 1.3rem;
   font-weight: 700;
+}
+
+/* Simple animations */
+@keyframes slideIn {
+  from {
+    left: -20rem;
+  }
+  to {
+    left: 1rem;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    left: 1rem;
+  }
+  to {
+    left: 25rem;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
