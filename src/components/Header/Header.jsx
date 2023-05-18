@@ -36,12 +36,13 @@ export default function Header({ text, toggleCart }) {
   };
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header} data-testid="header">
       <div className={styles.header__main}>
         <h1 className={styles.header__text}>{text}</h1>
         <div
           className={styles.header__search_icon}
           onClick={() => setSearchOpen(!isSearchOpen)}
+          data-testid="header-searchBtn"
         >
           <Image
             src={GLOBAL_ICONS.search.src}
@@ -50,7 +51,11 @@ export default function Header({ text, toggleCart }) {
             height={20}
           />
         </div>
-        <div className={styles.header__cart} onClick={toggleCart}>
+        <div
+          className={styles.header__cart}
+          onClick={toggleCart}
+          data-testid="header-cartBtn"
+        >
           <Image
             src={GLOBAL_ICONS.cart.src}
             alt={GLOBAL_ICONS.cart.altText}
@@ -70,6 +75,7 @@ export default function Header({ text, toggleCart }) {
           onChange={onSearchProduct}
           placeholder="Search product"
           value={searchValue}
+          data-testid="header-searchInput"
         />
         <Image
           src={GLOBAL_ICONS.clear.src}

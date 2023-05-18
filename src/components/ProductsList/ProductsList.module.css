@@ -1,52 +1,6 @@
 .list_container {
 }
 
-.list__sort {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 0.5rem;
-}
-
-.list__sortBlock {
-  display: flex;
-  align-items: center;
-}
-
-.sortBlock__label {
-  font-weight: 700;
-  color: rgba(0, 0, 0, 0.8);
-  padding-right: 0.5rem;
-}
-
-.sortBlock__button {
-  border: none;
-  background-color: transparent;
-  padding: 0.25rem 0.5rem;
-  transition: background 0.2s ease-in-out;
-}
-
-.sortBlock__buttonActive {
-  background-color: hsl(200, 100%, 85%);
-}
-
-.sortBlock__buttonGroup {
-  display: flex;
-  flex-grow: 1;
-  padding-right: 0.75rem;
-}
-
-.sortBlock__buttonGroup .sortBlock__button {
-  margin-left: 0.75rem;
-}
-
-.sortBlock__buttonGroup .sortBlock__button:first-child {
-  margin-left: 0;
-}
-
-.sortBlock__button img {
-  transition: all 0.2s ease-in-out;
-}
-
 .list {
   padding-top: 0.5rem;
 }

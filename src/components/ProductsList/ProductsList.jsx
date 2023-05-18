@@ -3,10 +3,13 @@
 // Dependencies
 import Image from "next/image";
 
+// Components
+import ProductsSort from "../ProductsSort/ProductsSort";
+
 // Redux
 import { addItemToCart } from "../../redux/features/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { updateProductsQty, updateOrder } from "../../redux/features/homeSlice";
+import { updateProductsQty } from "../../redux/features/homeSlice";
 
 // Styles
 import styles from "./ProductsList.module.css";
@@ -29,10 +32,6 @@ export default function ProductsList({ data, isLoading = false }) {
   const onAddProduct = (product) => {
     const qty = productsQty[product.id] || 1;
     dispatch(addItemToCart({ ...product, qty }));
-  };
-
-  const updateOrderType = (paramObj) => {
-    dispatch(updateOrder(paramObj));
   };
 
   // Functionalities
@@ -80,53 +79,16 @@ export default function ProductsList({ data, isLoading = false }) {
 
   return (
     <div className={styles.list_container}>
-      <div className={styles.list__sort}>
-        <div className={styles.list__sortBlock} style={{ flexGrow: 1 }}>
-          <label className={styles.sortBlock__label}>Sort By</label>
-          <div className={styles.sortBlock__buttonGroup}>
-            <button
-              className={`${styles.sortBlock__button} ${
-                orderType.type === "name" ? styles.sortBlock__buttonActive : ""
-              }`}
-              onClick={() => updateOrderType({ type: "name" })}
-            >
-              Name
-            </button>
-            <button
-              className={`${styles.sortBlock__button} ${
-                orderType.type === "description"
-                  ? styles.sortBlock__buttonActive
-                  : ""
-              }`}
-              onClick={() => updateOrderType({ type: "description" })}
-            >
-              Description
-            </button>
-          </div>
-        </div>
-        <div className={styles.list__sortBlock}>
-          <label className={styles.sortBlock__label}>Order</label>
-          <button
-            className={styles.sortBlock__button}
-            onClick={() => updateOrderType({ sort: !orderType.sort })}
-          >
-            <Image
-              src={GLOBAL_ICONS.order.src}
-              alt={GLOBAL_ICONS.order.altText}
-              width={15}
-              height={15}
-              style={{
-                transform: `scaleY(${orderType.sort ? "-1" : "1"})`,
-              }}
-            />
-          </button>
-        </div>
-      </div>
-      <ul className={styles.list}>
+      <ProductsSort />
+      <ul className={styles.list} data-testid="products-list">
         {!isLoading &&
           orderProducts().map((product) => {
             return (
-              <li className={styles.list__product} key={product.id}>
+              <li
+                className={styles.list__product}
+                key={product.id}
+                data-testid={`item-${product.id}`}
+              >
                 <div className={styles.list__info}>
                   <h4 className={styles.info__name}>{product.name}</h4>
                   <p className={styles.info__desc}>{product.description}</p>
@@ -140,6 +102,7 @@ export default function ProductsList({ data, isLoading = false }) {
                     }
                     disabled={checkValid(product.valid_until)}
                     value={getSelectedQty(product.id)}
+                    data-testid={`${product.id}-qtySelector`}
                   >
                     {QUANTITY_LIST.map((qty) => (
                       <option key={`${product.id}-${qty}`} value={qty}>
@@ -151,6 +114,7 @@ export default function ProductsList({ data, isLoading = false }) {
                     className={styles.qty__addBtn}
                     onClick={() => onAddProduct(product)}
                     disabled={checkValid(product.valid_until)}
+                    data-testid={`${product.id}-addBtn`}
                   >
                     <Image
                       src={GLOBAL_ICONS.add.src}

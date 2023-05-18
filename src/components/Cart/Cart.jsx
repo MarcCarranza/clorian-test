@@ -71,7 +71,7 @@ export default function Cart({ toggleCart }) {
         className={`${styles.cart} ${closingCart ? styles.cart_closing : ""}`}
         onClick={stopBubbling}
       >
-        <div className={styles.cart__header}>
+        <div className={styles.cart__header} data-testid="cart-header">
           <div className={styles.cart__header_title}>
             <h2 className={styles.cart__header_text}>Cart</h2>
             <Image
@@ -94,7 +94,7 @@ export default function Cart({ toggleCart }) {
           </button>
         </div>
         <span className={styles.cart__total_text}>Total</span>
-        <ul className={styles.cart__list}>
+        <ul className={styles.cart__list} data-testid="cart-list">
           {cartData.items.map((item) => {
             return (
               <li className={styles.cart__item} key={item.id}>
@@ -112,7 +112,7 @@ export default function Cart({ toggleCart }) {
             );
           })}
         </ul>
-        <div className={styles.cart__footer}>
+        <div className={styles.cart__footer} data-testid="cart-footer">
           <button
             className={styles.footer__clearBtn}
             disabled={!cartData.items.length}

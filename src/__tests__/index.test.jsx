@@ -9,17 +9,20 @@ import Home from "../app/page";
 import { Providers } from "../redux/provider";
 
 describe("Home", () => {
-  it("Renders header", () => {
+  it("Renders header and list", () => {
     render(
       <Providers>
         <Home />
       </Providers>
     );
 
-    const heading = screen.getByRole("heading", {
+    const heading = screen.getByTestId("header", {
       name: "Marc(ket)",
     });
+    const productsList = screen.getByTestId("products-list");
+    // expect(productsList).toContainElement("")
 
     expect(heading).toBeInTheDocument();
+    expect(productsList).toBeInTheDocument();
   });
 });
