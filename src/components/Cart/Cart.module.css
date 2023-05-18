@@ -73,7 +73,7 @@
 }
 
 .item__name {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
 }
 
@@ -84,6 +84,7 @@
   flex: 2;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .item__qty {

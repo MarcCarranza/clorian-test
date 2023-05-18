@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.main__container}>
-        <Header text={"DiscDogs"} toggleCart={toggleCartPopup} />
+        <Header text={"Marc(ket)"} toggleCart={toggleCartPopup} />
         <ProductsList data={productsData} isLoading={isLoading} />
         {isCartOpen && <Cart toggleCart={toggleCartPopup} />}
       </div>

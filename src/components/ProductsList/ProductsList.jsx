@@ -17,11 +17,14 @@ import { GLOBAL_ICONS, QUANTITY_LIST } from "../../constants";
 export default function ProductsList({ data, isLoading = false }) {
   // Redux
   const dispatch = useAppDispatch();
+  // TODO: Filter by search (Redux)
 
+  // TODO: The selectors have to be controlled
   // productsQty would be too much if the list is too large?
   const [productsQty, setProductsQty] = useState({});
+  const [orderType, setOrderType] = useState({ type: "name", sort: false });
 
-  // Functionalities
+  // Handlers
   const onChangeQuantity = (productId, qty) => {
     const updatedProductsQty = {
       ...productsQty,
@@ -36,6 +39,32 @@ export default function ProductsList({ data, isLoading = false }) {
     dispatch(addItemToCart({ ...product, qty }));
   };
 
+  const updateOrderType = (paramObj) => {
+    const updatedOrderType = {
+      ...orderType,
+      ...paramObj,
+    };
+    setOrderType(updatedOrderType);
+  };
+
+  // Functionalities
+  const orderProducts = () => {
+    const sortedProducts = [...data];
+    sortedProducts.sort((a, b) => {
+      const prodAName = a[orderType.type].toUpperCase();
+      const prodBName = b[orderType.type].toUpperCase();
+
+      if (prodAName < prodBName) {
+        return orderType.sort ? -1 : 1;
+      }
+      if (prodAName > prodBName) {
+        return orderType.sort ? 1 : -1;
+      }
+      return 0;
+    });
+    return sortedProducts;
+  };
+
   const checkValid = (date) => {
     const validDate = new Date(date).valueOf();
     const now = new Date().valueOf();
@@ -44,14 +73,50 @@ export default function ProductsList({ data, isLoading = false }) {
 
   return (
     <div className={styles.list_wrapper}>
+      <div className={styles.list__sort}>
+        <div className={styles.list__sortBlock} style={{ flexGrow: 1 }}>
+          <label className={styles.sortBlock__label}>Sort By</label>
+          <div className={styles.sortBlock__buttonGroup}>
+            <button
+              className={styles.sortBlock__button}
+              onClick={() => updateOrderType({ type: "name" })}
+            >
+              Name
+            </button>
+            <button
+              className={styles.sortBlock__button}
+              onClick={() => updateOrderType({ type: "description" })}
+            >
+              Description
+            </button>
+          </div>
+        </div>
+        <div className={styles.list__sortBlock}>
+          <label className={styles.sortBlock__label}>Order</label>
+          <button
+            className={styles.sortBlock__button}
+            onClick={() => updateOrderType({ sort: !orderType.sort })}
+          >
+            <Image
+              src={GLOBAL_ICONS.order.src}
+              altText={GLOBAL_ICONS.order.altText}
+              width={15}
+              height={15}
+              style={{
+                transform: `scaleY(${orderType.sort ? "-1" : "1"})`,
+              }}
+            />
+          </button>
+        </div>
+      </div>
       <ul className={styles.list}>
         {!isLoading &&
-          data.map((product) => {
+          orderProducts().map((product) => {
             return (
               <li className={styles.list__product} key={product.id}>
                 <div className={styles.list__info}>
-                  <h4>{product.name}</h4>
-                  <p>{product.description}</p>
+                  <h4 className={styles.info__name}>{product.name}</h4>
+                  <p className={styles.info__desc}>{product.description}</p>
                 </div>
                 <div className={styles.list__qty}>
                   <select

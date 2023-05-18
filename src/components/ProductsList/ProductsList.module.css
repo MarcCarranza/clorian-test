@@ -1,6 +1,39 @@
 .list_wrapper {
 }
 
+.list__sort {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list__sortBlock {
+  display: flex;
+  align-items: center;
+}
+
+.sortBlock__label {
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.8);
+  padding-right: 0.5rem;
+}
+
+.sortBlock__button {
+  border: none;
+  background-color: transparent;
+  padding: 0.25rem 0.5rem;
+}
+
+.sortBlock__buttonGroup {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  padding-right: 0.75rem;
+}
+
+.sortBlock__button img {
+  transition: all 0.2s ease-in-out;
+}
+
 .list {
   padding-top: 1rem;
 }
@@ -11,6 +44,15 @@
 
 .list__info {
   flex: 8;
+  padding-right: 0.5rem;
+}
+
+.info__name {
+  margin: 0.5rem 0;
+}
+
+.info__desc {
+  margin: 0.75rem 0;
 }
 
 .list__qty {
@@ -29,7 +71,7 @@
 .qty__addBtn {
   border: none;
   background: none;
-  padding: 0.5rem;
+  padding: 0.25rem 0.5rem;
   padding-top: calc(0.5rem + 2px);
   cursor: pointer;
   margin-left: 0.25rem;

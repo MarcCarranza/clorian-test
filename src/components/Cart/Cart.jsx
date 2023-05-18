@@ -24,6 +24,7 @@ export default function Cart({ toggleCart }) {
 
   const onClickClear = () => {
     dispatch(clearCart());
+    // TODO: setTimeout + animation
     toggleCart();
   };
 

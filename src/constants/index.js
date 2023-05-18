@@ -19,4 +19,8 @@ export const GLOBAL_ICONS = {
     src: "/x-square.svg",
     altText: "Close icon",
   },
+  order: {
+    src: "/arrow-up.svg",
+    altText: "Order icon",
+  },
 };
