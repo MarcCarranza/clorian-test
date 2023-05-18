@@ -19,9 +19,11 @@ import { GLOBAL_ICONS, QUANTITY_LIST } from "../../constants";
 
 export default function ProductsList({ data, isLoading = false }) {
   // Redux
-  const { productsQty, searchValue, orderType } = useAppSelector(
-    (state) => state.home
-  );
+  const {
+    productsQty,
+    search: searchValue,
+    orderType,
+  } = useAppSelector((state) => state.home);
   const dispatch = useAppDispatch();
 
   // Handlers
@@ -87,7 +89,7 @@ export default function ProductsList({ data, isLoading = false }) {
               <li
                 className={styles.list__product}
                 key={product.id}
-                data-testid={`item-${product.id}`}
+                data-testid="item-product"
               >
                 <div className={styles.list__info}>
                   <h4 className={styles.info__name}>{product.name}</h4>
@@ -102,7 +104,7 @@ export default function ProductsList({ data, isLoading = false }) {
                     }
                     disabled={checkValid(product.valid_until)}
                     value={getSelectedQty(product.id)}
-                    data-testid={`${product.id}-qtySelector`}
+                    data-testid="product-qtySelector"
                   >
                     {QUANTITY_LIST.map((qty) => (
                       <option key={`${product.id}-${qty}`} value={qty}>
@@ -114,7 +116,7 @@ export default function ProductsList({ data, isLoading = false }) {
                     className={styles.qty__addBtn}
                     onClick={() => onAddProduct(product)}
                     disabled={checkValid(product.valid_until)}
-                    data-testid={`${product.id}-addBtn`}
+                    data-testid="product-addBtn"
                   >
                     <Image
                       src={GLOBAL_ICONS.add.src}

@@ -70,6 +70,7 @@ export default function Cart({ toggleCart }) {
       <div
         className={`${styles.cart} ${closingCart ? styles.cart_closing : ""}`}
         onClick={stopBubbling}
+        data-testid="cart"
       >
         <div className={styles.cart__header} data-testid="cart-header">
           <div className={styles.cart__header_title}>
@@ -84,6 +85,7 @@ export default function Cart({ toggleCart }) {
           <button
             className={styles.cart__header_closeBtn}
             onClick={onClickClose}
+            data-testid="cart-closeBtn"
           >
             <Image
               src={GLOBAL_ICONS.close.src}
@@ -97,7 +99,11 @@ export default function Cart({ toggleCart }) {
         <ul className={styles.cart__list} data-testid="cart-list">
           {cartData.items.map((item) => {
             return (
-              <li className={styles.cart__item} key={item.id}>
+              <li
+                className={styles.cart__item}
+                key={item.id}
+                data-testid="cart-item"
+              >
                 <div className={styles.item__info}>
                   <span className={styles.item__name}>{item.name}</span>
                   <span className={styles.item__price}>{item.price}€</span>
@@ -112,11 +118,12 @@ export default function Cart({ toggleCart }) {
             );
           })}
         </ul>
-        <div className={styles.cart__footer} data-testid="cart-footer">
+        <div className={styles.cart__footer}>
           <button
             className={styles.footer__clearBtn}
             disabled={!cartData.items.length}
             onClick={onClickClear}
+            data-testid="cart-clearBtn"
           >
             Clear Cart
           </button>
