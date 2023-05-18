@@ -83,6 +83,7 @@ export default function Header({ text, toggleCart }) {
           height={20}
           width={20}
           onClick={onClearSearch}
+          data-testid="header-searchClear"
         />
       </div>
     </header>

@@ -165,7 +165,7 @@
 /* Simple animations */
 @keyframes slideIn {
   from {
-    left: -20rem;
+    left: -100%;
   }
   to {
     left: 1rem;
@@ -177,7 +177,7 @@
     left: 1rem;
   }
   to {
-    left: 25rem;
+    left: 100%;
   }
 }
 

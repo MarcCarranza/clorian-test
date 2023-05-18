@@ -109,8 +109,13 @@ export default function Cart({ toggleCart }) {
                   <span className={styles.item__price}>{item.price}€</span>
                 </div>
                 <div className={styles.item__pricing}>
-                  <span className={styles.item__qty}>{item.qty}</span>
-                  <span className={styles.item__total}>
+                  <span className={styles.item__qty} data-testid="cart-itemQty">
+                    {item.qty}
+                  </span>
+                  <span
+                    className={styles.item__total}
+                    data-testid="cart-totalPrice"
+                  >
                     {(item.price * item.qty).toFixed(2)}€
                   </span>
                 </div>

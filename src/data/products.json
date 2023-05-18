@@ -30,7 +30,7 @@
   {
     "id": "product4",
     "name": "Traktor S2 Mk3",
-    "description": "A good table for those who want to get into mixing",
+    "description": "Nice table for those who want to get into mixing",
     "valid_until": "2023-06-01",
     "price": 20.12
   },
@@ -38,7 +38,7 @@
     "id": "product5",
     "name": "Again.. Tracksuit",
     "description": "The official tracksuit of Fred Again.., released with Actual Life 3",
-    "valid_until": "2023-06-01",
+    "valid_until": "2023-07-01",
     "price": 30.69
   }
 ]
