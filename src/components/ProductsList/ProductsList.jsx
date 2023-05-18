@@ -5,6 +5,7 @@ import Image from "next/image";
 
 // Components
 import ProductsSort from "../ProductsSort/ProductsSort";
+import Loader from "../Loader/Loader";
 
 // Redux
 import { addItemToCart } from "../../redux/features/cartSlice";
@@ -82,6 +83,7 @@ export default function ProductsList({ data, isLoading = false }) {
   return (
     <div className={styles.list_container}>
       <ProductsSort />
+      {isLoading && <Loader />}
       <ul className={styles.list} data-testid="products-list">
         {!isLoading &&
           orderProducts().map((product) => {

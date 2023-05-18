@@ -3,7 +3,7 @@
 # Requirements
 
 - Node v18.16.0 (LTS)
-- npm 9.5.1
+- npm v9.5.1
 
 First, run the development server:
 
