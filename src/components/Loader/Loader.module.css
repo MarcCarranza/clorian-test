@@ -6,7 +6,7 @@
 }
 
 .loader__static {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--grey-clear);
   width: 50%;
   height: 10px;
   border-radius: 1rem;
@@ -15,7 +15,7 @@
 
 .loader__dynamic {
   height: 100%;
-  background-color: hsl(200, 100%, 70%);
+  background-color: var(--blue-medium);
   width: 1rem;
   border-radius: 1rem;
   position: absolute;

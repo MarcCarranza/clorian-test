@@ -45,11 +45,11 @@
 }
 
 .qty__addBtn:hover {
-  background-color: hsl(200, 100%, 93%);
+  background-color: var(--blue-clear);
 }
 
 .qty__addBtn:active {
-  background-color: hsl(200, 100%, 85%);
+  background-color: var(--blue);
   margin-top: 10px;
 }
 

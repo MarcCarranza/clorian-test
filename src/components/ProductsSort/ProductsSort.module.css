@@ -2,8 +2,8 @@
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--grey-clear);
+  border-bottom: 1px solid var(--grey-clear);
 }
 
 .sortBlock {
@@ -13,7 +13,7 @@
 
 .sortBlock__label {
   font-weight: 700;
-  color: rgba(0, 0, 0, 0.8);
+  color: var(--black-label);
   padding-right: 0.5rem;
 }
 
@@ -25,11 +25,11 @@
 }
 
 .sortBlock__button:hover {
-  background-color: hsl(200, 100%, 93%);
+  background-color: var(--blue-clear);
 }
 
 .sortBlock__buttonActive {
-  background-color: hsl(200, 100%, 85%);
+  background-color: var(--blue);
 }
 
 .sortBlock__buttonGroup {

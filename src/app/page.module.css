@@ -1,5 +1,5 @@
 .main {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--grey-clear);
   padding: 0.5rem;
   min-height: calc(100vh - 1rem);
 }

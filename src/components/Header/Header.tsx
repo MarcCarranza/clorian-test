@@ -14,12 +14,14 @@ import styles from "./Header.module.css";
 // Constants
 import { GLOBAL_ICONS } from "../../constants";
 import { AppState, HomeState } from "../../types/Redux";
+import { Item } from "../../types/Cart";
 
 export default function Header({ text, toggleCart }): ReactElement {
   // Redux
-  const { search: searchValue }: HomeState = useAppSelector(
-    (state: AppState) => state.home
-  );
+  const {
+    home: { search: searchValue },
+    cart: { items: cartItems },
+  } = useAppSelector((state: AppState) => state);
   const dispatch = useAppDispatch();
 
   // State
@@ -65,6 +67,9 @@ export default function Header({ text, toggleCart }): ReactElement {
             width={20}
             height={20}
           />
+          {cartItems.length > 0 && (
+            <div className={styles.header__cartCount}>{cartItems.length}</div>
+          )}
         </button>
       </div>
       <div
