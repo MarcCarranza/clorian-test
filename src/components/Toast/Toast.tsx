@@ -22,7 +22,7 @@ export default function Toast({
     if (isOpen) {
       setTimeout(() => {
         setToast(false);
-      }, 2000);
+      }, 1000);
     }
   }, [isOpen]);
 
