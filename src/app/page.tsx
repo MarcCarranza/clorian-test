@@ -29,6 +29,7 @@ export default function Home(): ReactElement {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [isCartOpen, setCartOpen] = useState<boolean>(false);
 
+  // Use Effects
   useEffect(() => {
     dispatch(getProducts());
     setLoading(false);

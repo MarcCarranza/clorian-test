@@ -1,11 +1,13 @@
 "use client";
 
 // Dependencies
+import { ReactElement, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 // Components
 import ProductsSort from "../ProductsSort/ProductsSort";
 import Loader from "../Loader/Loader";
+import Toast from "../Toast/Toast";
 
 // Redux
 import { addItemToCart } from "../../redux/features/cartSlice";
@@ -21,7 +23,6 @@ import { GLOBAL_ICONS, QUANTITY_LIST } from "../../constants";
 // Types
 import { Product } from "../../types/Home";
 import { AppState } from "../../types/Redux";
-import { ReactElement } from "react";
 
 type Props = {
   data: Product[];
@@ -40,6 +41,10 @@ export default function ProductsList({
   } = useAppSelector((state: AppState) => state.home);
   const dispatch = useAppDispatch();
 
+  // State
+  const [showToast, setToast] = useState<boolean>(false);
+  const toastMsg = useRef<string>("");
+
   // Handlers
   const onChangeQuantity = (productId: string, qty: string): void => {
     dispatch(updateProductsQty({ productId, qty }));
@@ -48,6 +53,8 @@ export default function ProductsList({
   const onAddProduct = (product: Product): void => {
     const qty = parseInt(productsQty[product.id]) || 1;
     dispatch(addItemToCart({ ...product, qty }));
+    toastMsg.current = `${qty} ${product.name} Added`;
+    setToast(true);
   };
 
   // Functionalities
@@ -145,6 +152,11 @@ export default function ProductsList({
             );
           })}
       </ul>
+      <Toast
+        message={toastMsg.current}
+        isOpen={showToast}
+        setToast={setToast}
+      />
     </div>
   );
 }

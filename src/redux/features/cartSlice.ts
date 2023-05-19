@@ -8,6 +8,7 @@ const initialState: CartState = {
   items: [],
 };
 
+// TODO: PAYLOAD ACTIONS
 export const cartSlice = createSlice({
   name: "cart",
   initialState,

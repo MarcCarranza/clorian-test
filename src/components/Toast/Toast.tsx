@@ -1,13 +1,38 @@
+"use client";
+
 // Dependencies
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 // Styles
 import styles from "./Toast.module.css";
 
 type Props = {
-  children: ReactElement;
+  isOpen: boolean;
+  message: string;
+  setToast: Function;
 };
 
-export default function Toast({ children }: Props): ReactElement {
-  return <div className={styles.toast}>{children}</div>;
+export default function Toast({
+  isOpen,
+  message,
+  setToast,
+}: Props): ReactElement {
+  // Use Effects
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        setToast(false);
+      }, 2000);
+    }
+  }, [isOpen]);
+
+  return (
+    <div>
+      {isOpen && (
+        <div className={styles.toast_wrapper}>
+          <div className={styles.toast}>{message}</div>
+        </div>
+      )}
+    </div>
+  );
 }
