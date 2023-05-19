@@ -8,6 +8,9 @@ import userEvent from "@testing-library/user-event";
 import { Providers } from "../redux/provider";
 import Home from "../app/page";
 
+// Redux
+import reducer, { addItemToCart } from "../redux/features/cartSlice";
+
 // Test IDs
 import { CART_IDS, HEADER_IDS, PRODUCT_LIST_IDS } from "../constants/testIds";
 
@@ -82,5 +85,32 @@ describe("Cart", () => {
     setTimeout(async () => {
       expect(await screen.findByTestId(CART_IDS.cart)).not.toBeInTheDocument();
     }, 200);
+  });
+
+  it("Test addItemToCart reducer with invalid and valid items", () => {
+    // Invalid Item
+    const invalidItem = {
+      id: "productTest0",
+      name: "Invalid Item",
+      description: "Testing this reducer",
+      valid_until: "2023-05-01",
+      price: 5.05,
+      qty: 1,
+    };
+
+    const emptyState = reducer(undefined, addItemToCart(invalidItem));
+    expect(emptyState.items.length).toBe(0);
+
+    const validItem = {
+      id: "productTest1",
+      name: "Valid Item",
+      description: "Testing this reducer",
+      valid_until: "2023-07-01",
+      price: 5.05,
+      qty: 1,
+    };
+
+    const reduxState = reducer(undefined, addItemToCart(validItem));
+    expect(reduxState.items.length).toBe(1);
   });
 });

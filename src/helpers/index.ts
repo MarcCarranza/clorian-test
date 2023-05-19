@@ -1,6 +1,6 @@
 import { Item } from "../types/Cart";
 
-export const checkValid = (date: string): boolean => {
+export const isNotValid = (date: string): boolean => {
   const validDate = new Date(date).valueOf();
   const now = new Date().valueOf();
   return validDate - now < 0;

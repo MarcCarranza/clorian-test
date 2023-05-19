@@ -18,7 +18,7 @@ import { updateProductsQty } from "../../redux/features/homeSlice";
 import { useProductsList } from "../../hooks/useProductsList";
 
 // Helpers
-import { checkValid } from "../../helpers";
+import { isNotValid } from "../../helpers";
 
 // Styles
 import styles from "./ProductsList.module.css";
@@ -93,7 +93,7 @@ export default function ProductsList({
                 onChange={(e) =>
                   onChangeQuantity(product.id, e.currentTarget.value)
                 }
-                disabled={checkValid(product.valid_until)}
+                disabled={isNotValid(product.valid_until)}
                 value={getSelectedQty(product.id)}
                 data-testid="product-qtySelector"
               >
@@ -106,7 +106,7 @@ export default function ProductsList({
               <button
                 className={styles.qty__addBtn}
                 onClick={() => onAddProduct(product)}
-                disabled={checkValid(product.valid_until)}
+                disabled={isNotValid(product.valid_until)}
                 data-testid="product-addBtn"
               >
                 <Image
