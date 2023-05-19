@@ -6,6 +6,7 @@ import { CartState } from "../../types/Redux";
 
 const initialState: CartState = {
   items: [],
+  totalPrice: 0,
 };
 
 // TODO: PAYLOAD ACTIONS
@@ -29,6 +30,16 @@ export const cartSlice = createSlice({
         updatedItems[itemIndex].qty = qty;
       }
       state.items = updatedItems;
+
+      // Set Total
+      if (!state.items.length) {
+        return;
+      }
+      const totalSum = state.items.reduce(
+        (acc, curr) => acc + curr.price * curr.qty,
+        0
+      );
+      state.totalPrice = totalSum;
     },
     updateCartItems: (state: CartState, action: PayloadAction<any>) => {},
     clearCart: (state: CartState) => {

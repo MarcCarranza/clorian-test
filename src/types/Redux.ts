@@ -21,6 +21,7 @@ export type HomeState = {
 
 export type CartState = {
   items: Item[];
+  totalPrice: number;
 };
 
 export type RootState = ReturnType<typeof store.getState>;

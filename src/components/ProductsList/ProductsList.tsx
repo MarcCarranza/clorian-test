@@ -53,7 +53,7 @@ export default function ProductsList({
   const onAddProduct = (product: Product): void => {
     const qty = parseInt(productsQty[product.id]) || 1;
     dispatch(addItemToCart({ ...product, qty }));
-    toastMsg.current = `${qty} ${product.name} Added`;
+    toastMsg.current = `${qty}x ${product.name} Added`;
     setToast(true);
   };
 

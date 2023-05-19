@@ -51,18 +51,6 @@ export default function Cart({ toggleCart }) {
     }, 200);
   };
 
-  // Functionalities
-  const getAllTotal = (): string => {
-    if (!cartData.items.length) {
-      return "0";
-    }
-    let totalSum = cartData.items.reduce(
-      (acc, curr) => acc + curr.price * curr.qty,
-      0
-    );
-    return totalSum.toFixed(2);
-  };
-
   return (
     <div className={styles.cart_container} onClick={toggleCart}>
       <div
@@ -135,7 +123,9 @@ export default function Cart({ toggleCart }) {
           >
             Clear Cart
           </button>
-          <span className={styles.footer__totalPrice}>{getAllTotal()}€</span>
+          <span className={styles.footer__totalPrice}>
+            {cartData.totalPrice}€
+          </span>
         </div>
       </div>
     </div>
