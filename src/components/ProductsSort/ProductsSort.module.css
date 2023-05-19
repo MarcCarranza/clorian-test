@@ -24,10 +24,6 @@
   transition: background 0.2s ease-in-out;
 }
 
-.sortBlock__button:hover {
-  background-color: var(--blue-clear);
-}
-
 .sortBlock__buttonActive {
   background-color: var(--blue);
 }
@@ -56,4 +52,10 @@
 
 .sortBlock__btnImg_reverse {
   transform: scaleY(-1);
+}
+
+@media (min-width: 800px) {
+  .sortBlock__button:hover {
+    background-color: var(--blue-clear);
+  }
 }

@@ -44,10 +44,6 @@
   margin-left: 0.25rem;
 }
 
-.qty__addBtn:hover {
-  background-color: var(--blue-clear);
-}
-
 .qty__addBtn:active {
   background-color: var(--blue);
   margin-top: 10px;
@@ -58,11 +54,17 @@
   cursor: unset;
 }
 
-.qty__addBtn:disabled:hover {
-  background-color: transparent;
-}
-
 .qty__addBtn:disabled:active {
   margin-top: 0;
   background-color: transparent;
+}
+
+@media (min-width: 800px) {
+  .qty__addBtn:hover {
+    background-color: var(--blue-clear);
+  }
+
+  .qty__addBtn:disabled:hover {
+    background-color: transparent;
+  }
 }
