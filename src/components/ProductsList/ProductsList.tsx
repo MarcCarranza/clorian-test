@@ -23,6 +23,7 @@ import { GLOBAL_ICONS, QUANTITY_LIST } from "../../constants";
 // Types
 import { Product } from "../../types/Home";
 import { AppState } from "../../types/Redux";
+import { useProductsList } from "../../hooks/useProductsList";
 
 type Props = {
   data: Product[];
@@ -34,16 +35,13 @@ export default function ProductsList({
   isLoading = false,
 }: Props): ReactElement {
   // Redux
-  const {
-    productsQty,
-    search: searchValue,
-    orderType,
-  } = useAppSelector((state: AppState) => state.home);
+  const { productsQty } = useAppSelector((state: AppState) => state.home);
   const dispatch = useAppDispatch();
 
   // State
   const [showToast, setToast] = useState<boolean>(false);
   const toastMsg = useRef<string>("");
+  const memoizedSortedList = useProductsList({ data });
 
   // Handlers
   const onChangeQuantity = (productId: string, qty: string): void => {
@@ -58,35 +56,6 @@ export default function ProductsList({
   };
 
   // Functionalities
-  const filterBySearch = (product: Product): Product | boolean => {
-    if (!searchValue) {
-      return product;
-    }
-    const productName = product.name.toLowerCase();
-    const productDesc = product.description.toLowerCase();
-    return (
-      productName.includes(searchValue.toLowerCase()) ||
-      productDesc.includes(searchValue.toLowerCase())
-    );
-  };
-
-  const orderProducts = (): Product[] => {
-    const sortedProducts = data.filter(filterBySearch);
-    sortedProducts.sort((a, b) => {
-      const prodAName = a[orderType.type].toUpperCase();
-      const prodBName = b[orderType.type].toUpperCase();
-
-      if (prodAName < prodBName) {
-        return orderType.sort ? -1 : 1;
-      }
-      if (prodAName > prodBName) {
-        return orderType.sort ? 1 : -1;
-      }
-      return 0;
-    });
-    return sortedProducts;
-  };
-
   const checkValid = (date: string): boolean => {
     const validDate = new Date(date).valueOf();
     const now = new Date().valueOf();
@@ -106,7 +75,7 @@ export default function ProductsList({
       {isLoading && <Loader />}
       <ul className={styles.list} data-testid="products-list">
         {!isLoading &&
-          orderProducts().map((product) => {
+          memoizedSortedList.map((product) => {
             return (
               <li
                 className={styles.list__product}
