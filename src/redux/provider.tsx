@@ -5,7 +5,12 @@ import { Provider } from "react-redux";
 
 // Redux
 import { store } from "./store";
+import { ReactElement } from "react";
 
-export function Providers({ children }) {
+type Props = {
+  children: ReactElement;
+};
+
+export function Providers({ children }): ReactElement {
   return <Provider store={store}>{children}</Provider>;
 }

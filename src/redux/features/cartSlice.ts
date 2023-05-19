@@ -1,7 +1,10 @@
 // Dependencies
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+// Types
+import { CartState } from "../../types/Redux";
+
+const initialState: CartState = {
   items: [],
 };
 
@@ -9,7 +12,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addItemToCart: (state, action) => {
+    addItemToCart: (state: CartState, action) => {
       const itemIndex = state.items.findIndex(
         (item) => item.id === action.payload.id
       );
@@ -17,8 +20,7 @@ export const cartSlice = createSlice({
       if (itemIndex === -1) {
         updatedItems.push(action.payload);
       } else {
-        let qty =
-          parseInt(updatedItems[itemIndex].qty) + parseInt(action.payload.qty);
+        let qty = updatedItems[itemIndex].qty + parseInt(action.payload.qty);
         // Checking if it's more than 10
         if (qty > 10) {
           qty = 10;
@@ -27,7 +29,10 @@ export const cartSlice = createSlice({
       }
       state.items = updatedItems;
     },
-    removeItemFromCart: (state, action) => {
+    removeItemFromCart: (
+      state: CartState,
+      action: PayloadAction<{ id: string }>
+    ) => {
       const itemIndex = state.items.findIndex(
         (item) => item.id === action.payload.id
       );
@@ -40,7 +45,7 @@ export const cartSlice = createSlice({
 
       state.items = updatedItems;
     },
-    clearCart: (state) => {
+    clearCart: (state: CartState) => {
       state.items = [];
     },
   },

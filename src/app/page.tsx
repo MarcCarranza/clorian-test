@@ -1,11 +1,12 @@
 "use client";
 
 // Dependencies
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 // Components
 import Header from "../components/Header/Header";
 import ProductsList from "../components/ProductsList/ProductsList";
+import Cart from "../components/Cart/Cart";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -13,15 +14,20 @@ import { getProducts } from "../redux/features/homeSlice";
 
 // Styles
 import styles from "./page.module.css";
-import Cart from "../components/Cart/Cart";
 
-export default function Home() {
-  const productsData = useAppSelector((state) => state.home.products);
+// Types
+import { AppState } from "../types/Redux";
+import { Product } from "../types/Home";
+
+export default function Home(): ReactElement {
+  const productsData: Product[] = useAppSelector(
+    (state: AppState) => state.home.products
+  );
   const dispatch = useAppDispatch();
 
   // State
-  const [isLoading, setLoading] = useState(true);
-  const [isCartOpen, setCartOpen] = useState(false);
+  const [isLoading, setLoading] = useState<boolean>(true);
+  const [isCartOpen, setCartOpen] = useState<boolean>(false);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -29,7 +35,7 @@ export default function Home() {
   }, []);
 
   // Functionalities
-  const toggleCartPopup = () => {
+  const toggleCartPopup = (): void => {
     setCartOpen(!isCartOpen);
   };
 

@@ -1,10 +1,13 @@
 // Dependencies
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 // Data
 import fakeData from "../../data/products.json";
 
-const initialState = {
+// Types
+import { HomeState } from "../../types/Redux";
+
+const initialState: HomeState = {
   products: [],
   search: "",
   productsQty: {},
@@ -18,13 +21,16 @@ export const homeSlice = createSlice({
   name: "home",
   initialState,
   reducers: {
-    getProducts: (state) => {
+    getProducts: (state: HomeState) => {
       state.products = fakeData;
     },
-    searchProduct: (state, action) => {
+    searchProduct: (state: HomeState, action: PayloadAction<string>) => {
       state.search = action.payload;
     },
-    updateProductsQty: (state, action) => {
+    updateProductsQty: (
+      state: HomeState,
+      action: PayloadAction<{ productId: string; qty: string }>
+    ) => {
       const { productId, qty } = action.payload;
 
       const updatedProductsQty = {
@@ -34,16 +40,19 @@ export const homeSlice = createSlice({
 
       state.productsQty = updatedProductsQty;
     },
-    clearProductsQty: (state) => {
+    clearProductsQty: (state: HomeState) => {
       state.productsQty = {};
     },
-    updateOrder: (state, action) => {
+    updateOrder: (
+      state: HomeState,
+      action: PayloadAction<{ [key: string]: string | boolean }>
+    ) => {
       state.orderType = {
         ...state.orderType,
         ...action.payload,
       };
     },
-    resetOrder: (state) => {
+    resetOrder: (state: HomeState) => {
       state.orderType = initialState.orderType;
     },
   },

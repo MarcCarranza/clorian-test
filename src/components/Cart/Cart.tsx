@@ -2,7 +2,7 @@
 
 // Dependencies
 import Image from "next/image";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -15,20 +15,23 @@ import styles from "./Cart.module.css";
 // Constants
 import { GLOBAL_ICONS } from "../../constants";
 
+// Types
+import { AppState, CartState } from "../../types/Redux";
+
 export default function Cart({ toggleCart }) {
   // Redux State
-  const cartData = useAppSelector((state) => state.cart);
+  const cartData: CartState = useAppSelector((state: AppState) => state.cart);
   const dispatch = useAppDispatch();
 
   // State
-  const [closingCart, setClosingCart] = useState(false);
+  const [closingCart, setClosingCart] = useState<boolean>(false);
 
   // Handling
-  const stopBubbling = (e) => {
+  const stopBubbling = (e: MouseEvent) => {
     e.stopPropagation();
   };
 
-  const onClickClose = () => {
+  const onClickClose = (): void => {
     setClosingCart(true);
     setTimeout(() => {
       toggleCart();
@@ -36,7 +39,7 @@ export default function Cart({ toggleCart }) {
     }, 200);
   };
 
-  const onClickClear = () => {
+  const onClickClear = (): void => {
     setClosingCart(true);
     dispatch(resetOrder());
     dispatch(clearCart());
@@ -49,9 +52,9 @@ export default function Cart({ toggleCart }) {
   };
 
   // Functionalities
-  const getAllTotal = () => {
+  const getAllTotal = (): string => {
     if (!cartData.items.length) {
-      return 0;
+      return "0";
     }
     let totalSum = cartData.items.reduce(
       (acc, curr) => acc + curr.price * curr.qty,

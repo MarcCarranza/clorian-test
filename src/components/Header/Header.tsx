@@ -1,7 +1,7 @@
 "use client";
 
 // Dependencies
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import Image from "next/image";
 
 // Redux
@@ -13,21 +13,24 @@ import styles from "./Header.module.css";
 
 // Constants
 import { GLOBAL_ICONS } from "../../constants";
+import { AppState, HomeState } from "../../types/Redux";
 
-export default function Header({ text, toggleCart }) {
+export default function Header({ text, toggleCart }): ReactElement {
   // Redux
-  const searchValue = useAppSelector((state) => state.home.search);
+  const { search: searchValue }: HomeState = useAppSelector(
+    (state: AppState) => state.home
+  );
   const dispatch = useAppDispatch();
 
   // State
-  const [isSearchOpen, setSearchOpen] = useState(false);
+  const [isSearchOpen, setSearchOpen] = useState<boolean>(false);
 
   // Handlers
-  const onSearchProduct = (e) => {
+  const onSearchProduct = (e): void => {
     dispatch(searchProduct(e.currentTarget.value));
   };
 
-  const onClearSearch = () => {
+  const onClearSearch = (): void => {
     if (!searchValue) {
       setSearchOpen(!isSearchOpen);
       return;

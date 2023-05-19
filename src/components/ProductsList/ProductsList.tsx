@@ -18,27 +18,40 @@ import styles from "./ProductsList.module.css";
 // Constants
 import { GLOBAL_ICONS, QUANTITY_LIST } from "../../constants";
 
-export default function ProductsList({ data, isLoading = false }) {
+// Types
+import { Product } from "../../types/Home";
+import { AppState } from "../../types/Redux";
+import { ReactElement } from "react";
+
+type Props = {
+  data: Product[];
+  isLoading?: boolean;
+};
+
+export default function ProductsList({
+  data,
+  isLoading = false,
+}: Props): ReactElement {
   // Redux
   const {
     productsQty,
     search: searchValue,
     orderType,
-  } = useAppSelector((state) => state.home);
+  } = useAppSelector((state: AppState) => state.home);
   const dispatch = useAppDispatch();
 
   // Handlers
-  const onChangeQuantity = (productId, qty) => {
+  const onChangeQuantity = (productId: string, qty: string): void => {
     dispatch(updateProductsQty({ productId, qty }));
   };
 
-  const onAddProduct = (product) => {
-    const qty = productsQty[product.id] || 1;
+  const onAddProduct = (product: Product): void => {
+    const qty = parseInt(productsQty[product.id]) || 1;
     dispatch(addItemToCart({ ...product, qty }));
   };
 
   // Functionalities
-  const filterBySearch = (product) => {
+  const filterBySearch = (product: Product): Product | boolean => {
     if (!searchValue) {
       return product;
     }
@@ -50,7 +63,7 @@ export default function ProductsList({ data, isLoading = false }) {
     );
   };
 
-  const orderProducts = () => {
+  const orderProducts = (): Product[] => {
     const sortedProducts = data.filter(filterBySearch);
     sortedProducts.sort((a, b) => {
       const prodAName = a[orderType.type].toUpperCase();
@@ -67,13 +80,13 @@ export default function ProductsList({ data, isLoading = false }) {
     return sortedProducts;
   };
 
-  const checkValid = (date) => {
+  const checkValid = (date: string): boolean => {
     const validDate = new Date(date).valueOf();
     const now = new Date().valueOf();
     return validDate - now < 0;
   };
 
-  const getSelectedQty = (productId) => {
+  const getSelectedQty = (productId: string): string => {
     if (productsQty[productId]) {
       return productsQty[productId];
     }

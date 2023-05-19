@@ -49,3 +49,11 @@
 .sortBlock__button img {
   transition: all 0.2s ease-in-out;
 }
+
+.sortBlock__btnImg {
+  transform: scaleY(1);
+}
+
+.sortBlock__btnImg_reverse {
+  transform: scaleY(-1);
+}

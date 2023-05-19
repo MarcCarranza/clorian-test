@@ -12,14 +12,19 @@ import styles from "./ProductsSort.module.css";
 
 // Constants
 import { GLOBAL_ICONS } from "../../constants";
+import { AppState, HomeState } from "../../types/Redux";
 
 export default function ProductsSort() {
   // Redux State
-  const { orderType } = useAppSelector((state) => state.home);
+  const { orderType } = useAppSelector(
+    (state: AppState): HomeState => state.home
+  );
   const dispatch = useAppDispatch();
 
   // Handlers
-  const updateOrderType = (paramObj) => {
+  const updateOrderType = (paramObj: {
+    [key: string]: string | boolean;
+  }): void => {
     dispatch(updateOrder(paramObj));
   };
 
@@ -62,9 +67,11 @@ export default function ProductsSort() {
             alt={GLOBAL_ICONS.order.altText}
             width={15}
             height={15}
-            style={{
-              transform: `scaleY(${orderType.sort ? "-1" : "1"})`,
-            }}
+            className={
+              orderType.sort
+                ? styles.sortBlock__btnImg_reverse
+                : styles.sortBlock__btnImg
+            }
           />
         </button>
       </div>
