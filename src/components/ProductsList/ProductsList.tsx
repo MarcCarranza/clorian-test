@@ -120,7 +120,7 @@ export default function ProductsList({
           </li>
         );
       }),
-    [data, searchValue, orderType]
+    [data, searchValue, orderType, productsQty]
   );
 
   return (
