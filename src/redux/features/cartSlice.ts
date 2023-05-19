@@ -2,7 +2,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 // Helpers
-import { getItemIndexById, sumAllItems } from "../../helpers";
+import { checkValid, getItemIndexById, sumAllItems } from "../../helpers";
 
 // Types
 import { CartState } from "../../types/Redux";
@@ -24,6 +24,11 @@ export const cartSlice = createSlice({
       if (itemIndex === -1) {
         updatedItems.push(action.payload);
       } else {
+        if (!checkValid(state.items[itemIndex].valid_until)) {
+          console.error("Invalid date");
+          return;
+        }
+
         let qty = updatedItems[itemIndex].qty + action.payload.qty;
         // Checking if it's more than 10
         if (qty > 10) {

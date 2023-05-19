@@ -10,13 +10,16 @@ import { AppState } from "../types/Redux";
 
 type Props = {
   data: Product[];
+  searchValue: string;
+  orderType: { type: string; sort: boolean };
 };
 
-export const useProductsList = ({ data }: Props): Product[] => {
+export const useProductsList = ({
+  data,
+  searchValue,
+  orderType,
+}: Props): Product[] => {
   // Redux
-  const { search: searchValue, orderType } = useAppSelector(
-    (state: AppState) => state.home
-  );
 
   const filterBySearch = (product: Product): Product | boolean => {
     if (!searchValue) {
@@ -47,5 +50,5 @@ export const useProductsList = ({ data }: Props): Product[] => {
     return sortedProducts;
   };
 
-  return useMemo(() => orderProducts(), [data, searchValue, orderType]);
+  return orderProducts();
 };
