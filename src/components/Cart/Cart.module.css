@@ -92,6 +92,11 @@
   padding: 0.5rem;
 }
 
+.item__removeBtn {
+  padding: 0.25rem;
+  border: 1px solid var(--light-grey);
+}
+
 .item__info {
   display: flex;
   align-items: center;
@@ -103,6 +108,7 @@
 .item__name {
   font-size: 1rem;
   font-weight: 600;
+  padding-right: 0.1rem;
 }
 
 .item__price {

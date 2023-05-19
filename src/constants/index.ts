@@ -27,4 +27,8 @@ export const GLOBAL_ICONS = {
     src: "/x.svg",
     altText: "Clear search icon",
   },
+  removeItem: {
+    src: "/trash-2.svg",
+    altText: "Remove item icon",
+  },
 };

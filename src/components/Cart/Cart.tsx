@@ -6,7 +6,7 @@ import { MouseEvent, useState } from "react";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { clearCart } from "../../redux/features/cartSlice";
+import { clearCart, removeItemFromCart } from "../../redux/features/cartSlice";
 import { clearProductsQty, resetOrder } from "../../redux/features/homeSlice";
 
 // Styles
@@ -33,10 +33,15 @@ export default function Cart({ toggleCart }) {
 
   const onClickClose = (): void => {
     setClosingCart(true);
+    // Timeout for animation
     setTimeout(() => {
       toggleCart();
       setClosingCart(false);
     }, 200);
+  };
+
+  const onRemoveItem = (id: string): void => {
+    dispatch(removeItemFromCart({ id }));
   };
 
   const onClickClear = (): void => {
@@ -95,6 +100,17 @@ export default function Cart({ toggleCart }) {
                 key={item.id}
                 data-testid="cart-item"
               >
+                <button
+                  className={styles.item__removeBtn}
+                  onClick={() => onRemoveItem(item.id)}
+                >
+                  <Image
+                    src={GLOBAL_ICONS.removeItem.src}
+                    alt={GLOBAL_ICONS.removeItem.altText}
+                    width={20}
+                    height={20}
+                  />
+                </button>
                 <div className={styles.item__info}>
                   <span className={styles.item__name}>{item.name}</span>
                   <span className={styles.item__price}>{item.price}€</span>
@@ -124,7 +140,7 @@ export default function Cart({ toggleCart }) {
             Clear Cart
           </button>
           <span className={styles.footer__totalPrice}>
-            {cartData.totalPrice}€
+            {cartData.totalPrice.toFixed(2)}€
           </span>
         </div>
       </div>
