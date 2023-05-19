@@ -58,6 +58,10 @@
   cursor: unset;
 }
 
+.qty__addBtn:disabled:hover {
+  background-color: transparent;
+}
+
 .qty__addBtn:disabled:active {
   margin-top: 0;
   background-color: transparent;
