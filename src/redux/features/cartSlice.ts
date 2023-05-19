@@ -1,6 +1,9 @@
 // Dependencies
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
+// Helpers
+import { getItemIndexById, sumAllItems } from "../../helpers";
+
 // Types
 import { CartState } from "../../types/Redux";
 import { Item } from "../../types/Cart";
@@ -8,10 +11,6 @@ import { Item } from "../../types/Cart";
 const initialState: CartState = {
   items: [],
   totalPrice: 0,
-};
-
-const getItemIndexById = (items: Item[], itemId: string) => {
-  return items.findIndex((item) => item.id === itemId);
 };
 
 // TODO: PAYLOAD ACTIONS
@@ -38,11 +37,7 @@ export const cartSlice = createSlice({
       if (!state.items.length) {
         return;
       }
-      const totalSum = state.items.reduce(
-        (acc, curr) => acc + curr.price * curr.qty,
-        0
-      );
-      state.totalPrice = totalSum;
+      state.totalPrice = sumAllItems(state.items);
     },
     removeItemFromCart: (
       state: CartState,
@@ -57,6 +52,9 @@ export const cartSlice = createSlice({
       updatedItems.splice(itemIndex, 1);
 
       state.items = updatedItems;
+
+      // Set total
+      state.totalPrice = sumAllItems(state.items);
     },
     clearCart: (state: CartState) => {
       state.items = [];
