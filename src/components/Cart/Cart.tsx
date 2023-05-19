@@ -103,6 +103,7 @@ export default function Cart({ toggleCart }) {
                 <button
                   className={styles.item__removeBtn}
                   onClick={() => onRemoveItem(item.id)}
+                  data-testid="cart-removeItemBtn"
                 >
                   <Image
                     src={GLOBAL_ICONS.removeItem.src}
