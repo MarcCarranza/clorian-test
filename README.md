@@ -12,6 +12,9 @@
 - NextJS
 - Redux
 - Typescript
+- User-Event
+- Jest
+- ESLint
 
 ## **Make it run** 👟
 
