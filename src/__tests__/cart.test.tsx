@@ -88,6 +88,8 @@ describe("Cart", () => {
   });
 
   it("Test addItemToCart reducer with invalid and valid items", () => {
+    const initialState = reducer(undefined, { type: undefined });
+
     // Invalid Item
     const invalidItem = {
       id: "productTest0",
@@ -98,7 +100,8 @@ describe("Cart", () => {
       qty: 1,
     };
 
-    const emptyState = reducer(undefined, addItemToCart(invalidItem));
+    const emptyState = reducer(initialState, addItemToCart(invalidItem));
+
     expect(emptyState.items.length).toBe(0);
 
     const validItem = {
@@ -110,7 +113,7 @@ describe("Cart", () => {
       qty: 1,
     };
 
-    const reduxState = reducer(undefined, addItemToCart(validItem));
+    const reduxState = reducer(initialState, addItemToCart(validItem));
     expect(reduxState.items.length).toBe(1);
   });
 });
