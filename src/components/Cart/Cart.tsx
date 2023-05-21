@@ -7,8 +7,11 @@ import { MouseEvent, useState } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { clearCart, removeItemFromCart } from "../../redux/features/cartSlice";
-import { clearProductsQty, resetOrder } from "../../redux/features/homeSlice";
-
+import {
+  clearProductsQty,
+  resetOrder,
+  searchProduct,
+} from "../../redux/features/homeSlice";
 // Styles
 import styles from "./Cart.module.css";
 
@@ -49,6 +52,7 @@ export default function Cart({ toggleCart }) {
     dispatch(resetOrder());
     dispatch(clearCart());
     dispatch(clearProductsQty());
+    dispatch(searchProduct(""));
     // Timeout for slideOut animation
     setTimeout(() => {
       toggleCart();
